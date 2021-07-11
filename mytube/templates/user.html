@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Darth Vader | MyTube</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        {% include "header.html" %}
+        <nav id="sidebar">        
+            <ul>
+                <li><a href="/">Main</a></li>
+                <li><a href="/">About</a></li>
+                <li><a href="/">Messages</a></li>            
+            </ul>        
+        </nav>
+        
+        <div id="content">
+            {% include "card.html" with name="Darth Vader" email="iv@example.com" %}
+            {# а можно сделать иначе: передать значения переменных #}
+            {% include "card.html" with name=user.name email=user.mail %}
+        </div>
+        {% include "footer.html" %}
+    </body>
+    </html>
+</html>

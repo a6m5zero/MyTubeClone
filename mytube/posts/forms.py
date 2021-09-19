@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm, fields , Form
 from django.http import request
-from .models import Post
+from .models import Post, Comments
 
 
 # class PostForm(ModelForm):
@@ -27,7 +27,7 @@ class ContactForm(Form):
 class AddPostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['groups', 'text', ]
+        fields = ['groups', 'text', 'image']
         
     def __init__(self , *args, **kwargs):
         self.author = kwargs.pop('author')
@@ -41,4 +41,9 @@ class AddPostForm(ModelForm):
             self.save_m2m()
         return instance
 
+class AddCommentForm(ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['text']
+    
 

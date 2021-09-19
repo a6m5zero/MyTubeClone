@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 {% load cache %}
-{% block title %}Последние обновления на сайте {% endblock %}
+{% block title %}Избранные авторы{% endblock %}
 
 {% block header %}
-Последние обновления на сайте
+Избранные авторы
 {% endblock header %}
 
 {% block content %}
-{% include "menu.html" with index=True %}
+<div class = 'container'>
+
+{% include "menu.html" with follow=True %}
 
     {% for post in posts %}
         {% include 'post_item.html' with post=post %}
     {% endfor %}
 
-    <div class = 'container'>
         <div class = 'row justify-content-center'>
             {% if posts.has_other_pages %}
             {% include 'paginator.html' with items=posts paginator=paginator %}

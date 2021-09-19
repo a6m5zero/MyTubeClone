@@ -24,8 +24,19 @@ SECRET_KEY = ')npv3+oz02z^*8r$f_&-sc#ohzddusa5)m8!$8&(#k659800yc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
-ALLOWED_HOSTS = []
+
+SITE_ID = 1
+
+
+ALLOWED_HOSTS = [
+        "localhost",
+        "127.0.0.1",
+        "[::1]",
+        "testserver",
+        ]
+
 LOGIN_URL = "/auth/login/"
 LOGIN_REDIRECT_URL = "index" 
 # LOGOUT_REDIRECT_URL = "index"
@@ -37,15 +48,27 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 # указываем директорию, в которую будут складываться файлы писем
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
+# подключаем бэкэнд кэширования:
+CACHES = {
+    'default':{
+        'BACKEND':'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
 INSTALLED_APPS = [
+    
     'Users',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.flatpages',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts',
+    'sorl.thumbnail',
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'mytube.urls'
@@ -132,3 +156,10 @@ STATIC_URL = "/static/"
 
 # задаём адрес директории, куда командой *collectstatic* будет собрана вся статика
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
